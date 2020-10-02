@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, ManyToMany, manyToMany, scope } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany, ManyToMany, manyToMany, scope } from '@ioc:Adonis/Lucid/Orm'
 import { PostStatus } from 'Contracts/enums'
-import Category from './Category'
+import Category from 'App/Models/Category'
+import Comment from 'App/Models/Comment'
 
 export default class Post extends BaseModel {
   @column({ isPrimary: true })
@@ -42,4 +43,7 @@ export default class Post extends BaseModel {
 
   @manyToMany(() => Category)
   public categories: ManyToMany<typeof Category>
+
+  @hasMany(() => Comment)
+  public comments: HasMany<typeof Comment>
 }
