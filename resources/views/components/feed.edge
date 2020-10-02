@@ -1,9 +1,13 @@
-<ul class="feed">
-  @each(post in posts)
-    <li>
-      @!component('components/feed_post', { post })
-    </li>
-  @else
+<link rel="stylesheet" href="/css/feed.css">
+
+@if(posts && posts.length >= 1)
+  <ul class="feed">
+    @each(post in posts)
+      <li>
+        @!component('components/feed_post', { post })
+      </li>
+    @endeach
+  </ul>
+@else
   <div class="empty-msg">Nenhuma postagem ainda.</div>
-  @endeach
-</ul>
+@endif
