@@ -1,6 +1,6 @@
 <header class="sidebar" role="banner">
   <h1 class="logo">
-    <a href="{{ route('PostsController.index') }}">{{ site_name }}</a>
+    <a href="{{ route('home-page') }}">{{ site_name }}</a>
   </h1>
   <p class="description">Um simples blog feito com a versão 5 do <a href="https://preview.adonisjs.com/">AdonisJS</a>.</p>
 
@@ -12,7 +12,7 @@
     <div class="sidebar__section-title">Categorias</div>
     <ul class="sidebar__categories">
       @each(category in publicCategories)
-        <li><a href="/topic/{{ category.slug }}">{{ category.title }}</a></li>
+        <li><a href="{{ route('category-page', { slug: category.slug })}}">{{ category.title }}</a></li>
       @endeach
     </ul>
   @endif

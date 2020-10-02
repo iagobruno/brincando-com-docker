@@ -99,7 +99,15 @@ ul.sidebar__links li {
   color: var(--heading-color);
   font-size: 1.6rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: var(--default-margin);
+}
+
+.section-title > span {
+  display: block;
+  margin-bottom: 0;
+  font-size: 0.6em;
+  font-weight: normal;
+  line-height: normal;
 }
 
 ul.feed {

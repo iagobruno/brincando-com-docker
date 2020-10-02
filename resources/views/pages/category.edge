@@ -1,0 +1,14 @@
+@layout('layouts/main')
+
+@set('title', `Postagens com a categoria "${category.title}"`)
+@set('body_class', 'category-page')
+
+@section('content')
+  <h2 class="section-title">
+    <span>Categoria:</span>
+    {{ category.title }}
+  </h2>
+  @!component('components/feed', {
+    posts: category.posts,
+  })
+@endsection
