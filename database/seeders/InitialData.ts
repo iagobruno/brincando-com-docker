@@ -1,6 +1,5 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { CategoryStatus } from 'Contracts/enums'
 import { PostFactory } from 'Database/factories'
 
 export default class InitialDatumSeeder extends BaseSeeder {
@@ -20,29 +19,35 @@ export default class InitialDatumSeeder extends BaseSeeder {
       .with('comments', 5)
       .createMany(10)
 
-    await wait(1000)
+    await pause(1000)
 
     await PostFactory
+      .apply('published')
       .merge({
         title: 'Hello darkness 🌚',
         slug: 'hello-darkness',
         summary: 'This site has a dark theme!',
         thumbnailUrl: 'https://lh3.googleusercontent.com/zxKVYXJ0X6NIVQNz9XyPI-K1xEok7dtY7kQ72q0t-sqXET7gzl_nr67ybgOMpS6hvzIwEhZ0=w640-h400-e365-rj-sc0x00ffffff',
       })
-      .apply('published')
       .with('comments', 3)
-      .create()
-      .then(post =>
-        post.related('categories').create({
+      .with('categories', 1, (cat) => {
+        cat.merge({
           title: 'Design',
           slug: 'design',
-          status: CategoryStatus.PUBLIC,
         })
-      )
+        cat.apply('public')
+      })
+      .create()
+
+    await pause(1000)
+
+    await PostFactory
+      .apply('private')
+      .create()
   }
 }
 
 
-function wait (ms = 1000) {
+function pause (ms = 1000) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
