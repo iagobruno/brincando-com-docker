@@ -1,8 +1,9 @@
 import Factory from '@ioc:Adonis/Lucid/Factory'
 import Category from 'App/Models/Category'
 import Comment from 'App/Models/Comment'
+import Page from 'App/Models/Page'
 import Post from 'App/Models/Post'
-import { CategoryStatus, PostStatus } from 'Contracts/enums'
+import { CategoryStatus, PageStatus, PostStatus } from 'Contracts/enums'
 import { DateTime } from 'luxon'
 
 
@@ -41,4 +42,15 @@ export const CommentFactory = Factory.define(Comment, ({ faker }) => ({
   body: faker.lorem.paragraph(),
 }))
   .relation('post', () => PostFactory)
+  .build()
+
+
+export const PageFactory = Factory.define(Page, ({ faker }) => ({
+  status: PageStatus.PRIVATE,
+  slug: faker.lorem.slug(4),
+  title: faker.lorem.words(4),
+  body: faker.lorem.paragraphs(8),
+}))
+  .state('public', (page) => page.status = PageStatus.PUBLIC)
+  .state('private', (page) => page.status = PageStatus.PRIVATE)
   .build()

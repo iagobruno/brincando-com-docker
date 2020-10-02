@@ -15,3 +15,5 @@ Route.get('/health', async () => {
     report
   }
 })
+
+Route.get('/:slug', 'PagesController.show')

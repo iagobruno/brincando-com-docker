@@ -1,14 +1,24 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { PostFactory } from 'Database/factories'
+import { PageFactory, PostFactory } from 'Database/factories'
 
 export default class InitialDatumSeeder extends BaseSeeder {
   public async run () {
     // Empty entire database
+    await Database.from('pages').delete()
     await Database.from('posts').delete()
     await Database.from('comments').delete()
     await Database.from('categories').delete()
     await Database.from('category_post').delete()
+
+
+    await PageFactory
+      .merge({
+        title: 'Sobre',
+        slug: 'sobre',
+      })
+      .apply('public')
+      .create()
 
 
     await PostFactory

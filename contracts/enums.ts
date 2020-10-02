@@ -8,3 +8,8 @@ export enum CategoryStatus {
   PUBLIC = 'public',
   PRIVATE = 'private',
 }
+
+export enum PageStatus {
+  PUBLIC = 'public',
+  PRIVATE = 'private',
+}

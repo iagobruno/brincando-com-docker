@@ -12,11 +12,17 @@
   <article class="post" id="post-{{ post.id }}">
     <header>
       <h1 class="post__title">{{ post.title }}</h1>
-      <p class="post__summary">{{ post.summary }}</p>
+      @if(post.summary)
+        <p class="post__summary">{{ post.summary }}</p>
+      @endif
       <div class="post__infos">
-        <div class="post__date">Postado em {{ post.publishedAt.toFormat("EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm") }}</div>
+        @if(post.publishedAt)
+          <div class="post__date">Postado em {{ post.publishedAt.toFormat("EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm") }}</div>
+        @endif
       </div>
-      <img class="post__cover" src="{{ post.thumbnailUrl }}">
+      @if(post.thumbnailUrl)
+        <img class="post__cover" src="{{ post.thumbnailUrl }}">
+      @endif
     </header>
 
     <div class="post__body markdown-body">
@@ -24,48 +30,52 @@
     </div>
 
     <footer>
-      <div class="post__topics">
-        <strong>Categorias:</strong>
-        @each(cat in post.categories)
-          <a href="{{ route('category-page', { slug: cat.slug })}}">{{ cat.title }}</a>,
-        @endeach
-      </div>
-
-      <div class="post__comments">
-        <strong class="post__comments-title">Comentários</strong>
-
-        <form
-          class="post__comments__form"
-          action="{{ route('CommentsController.store', { slug: post.slug }) }}"
-          method="POST"
-        >
-          <input
-            type="text"
-            name="comment_body"
-            maxlength="255"
-            required
-            autocomplete="off"
-            placeholder="Digite um novo comentário..."
-            value="{{ flashMessages.get('comment_body') || '' }}"
-          >
-          <input type="submit" value="enviar" style="display: none">
-          @if(flashMessages.has('errors.comment_body'))
-            <div class="post__comments__form-error">{{ flashMessages.get('errors.comment_body') }}</div>
-          @endif
-        </form>
-
-        <ul class="post__comment-list">
-          @each(comment in post.comments)
-            <li class="post__comment">
-              <div>Anônimo disse:</div>
-              <div>{{ comment.body }}</div>
-              <div><relative-time datetime="{{ post.publishedAt }}"></relative-time></div>
-            </li>
-          @else
-            <div class="empty-msg">Nenhum comentário ainda.</div>
+      @if(post.categories)
+        <div class="post__topics">
+          <strong>Categorias:</strong>
+          @each(cat in post.categories)
+            <a href="{{ route('category-page', { slug: cat.slug })}}">{{ cat.title }}</a>,
           @endeach
-        </ul>
-      </div>
+        </div>
+      @endif
+
+      @if(typeof showCommentsSection !== 'undefined' && showCommentsSection)
+        <div class="post__comments">
+          <strong class="post__comments-title">Comentários</strong>
+
+          <form
+            class="post__comments__form"
+            action="{{ route('CommentsController.store', { slug: post.slug }) }}"
+            method="POST"
+          >
+            <input
+              type="text"
+              name="comment_body"
+              maxlength="255"
+              required
+              autocomplete="off"
+              placeholder="Digite um novo comentário..."
+              value="{{ flashMessages.get('comment_body') || '' }}"
+            >
+            <input type="submit" value="enviar" style="display: none">
+            @if(flashMessages.has('errors.comment_body'))
+              <div class="post__comments__form-error">{{ flashMessages.get('errors.comment_body') }}</div>
+            @endif
+          </form>
+
+          <ul class="post__comment-list">
+            @each(comment in post.comments)
+              <li class="post__comment">
+                <div>Anônimo disse:</div>
+                <div>{{ comment.body }}</div>
+                <div><relative-time datetime="{{ post.publishedAt }}"></relative-time></div>
+              </li>
+            @else
+              <div class="empty-msg">Nenhum comentário ainda.</div>
+            @endeach
+          </ul>
+        </div>
+      @endif
     </footer>
   </article>
 @endsection

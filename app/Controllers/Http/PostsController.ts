@@ -6,16 +6,15 @@ import { PostStatus } from 'Contracts/enums'
 export default class PostsController {
   public async index ({ view }: HttpContextContract) {
     const result = await Post.query()
-      .apply(scopes => scopes.published())
-      .orderBy('published_at', 'desc')
-    const [featuredPost, ...latestPosts] = result
+      .apply(scopes => scopes.isPublished())
+      .apply(scopes => scopes.newestFirst())
 
-    const publicCategories = await Category.getPublicCategories()
+    const [featuredPost, ...latestPosts] = result
 
     return view.render('pages/home', {
       latestPosts,
       featuredPost,
-      publicCategories
+      publicCategories: await Category.getPublicCategories()
     })
   }
 
@@ -33,7 +32,8 @@ export default class PostsController {
 
     return view.render('pages/post', {
       post,
-      publicCategories
+      publicCategories,
+      showCommentsSection: true
     })
   }
 
