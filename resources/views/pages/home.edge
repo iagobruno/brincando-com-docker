@@ -1,0 +1,12 @@
+@layout('layouts/main')
+
+@set('title', 'Últimas postagens')
+@set('body_class', 'home-page')
+
+@section('content')
+  <h2 class="section-title">Últimas postagens</h2>
+
+  @!component('components/feed', {
+    posts: latestPosts,
+  })
+@endsection

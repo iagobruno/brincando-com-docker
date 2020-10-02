@@ -1,0 +1,27 @@
+@set('site_name', 'Adonis5 Blog')
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title ? `${title} - ` : '' }}{{ site_name }}</title>
+  <link rel="icon" href="/favicon.png" />
+
+  <link rel="stylesheet" href="/css/styles.css">
+
+  <script type="module"src="https://unpkg.com/@github/time-elements"></script>
+
+  @!section('extra_head')
+</head>
+<body class="{{ body_class || '' }}">
+
+  @include('layouts/partials/sidebar')
+
+  <main>
+    @!section('content')
+  </main>
+
+  @!section('extra_footer')
+</body>
+</html>

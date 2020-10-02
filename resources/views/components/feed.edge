@@ -1,0 +1,16 @@
+<ul class="feed">
+  @each(post in posts)
+    <li class="feed__post" id="post-{{post.id}}">
+      <a href="/post/{{ post.slug }}">
+        <div class="feed__post__thumb-wrapper">
+          <img src="{{ post.thumbnailUrl }}" class="feed__post__thumb" loading="lazy">
+        </div>
+        <h6 class="feed__post__title">{{ post.title }}</h6>
+        <p class="feed__post__description">{{ post.summary }}</p>
+        <div class="feed__post__footer">
+          <relative-time datetime="{{ post.publishedAt }}"></relative-time>
+        </div>
+      </a>
+    </li>
+  @endeach
+</ul>
