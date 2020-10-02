@@ -17,6 +17,7 @@ export default class InitialDatumSeeder extends BaseSeeder {
     await PostFactory
       .apply('published')
       .with('comments', 5)
+      .with('categories', 2, (cat) => cat.apply('public'))
       .createMany(10)
 
     await pause(1000)

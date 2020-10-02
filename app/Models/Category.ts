@@ -25,4 +25,11 @@ export default class Category extends BaseModel {
 
   @manyToMany(() => Post)
   public posts: ManyToMany<typeof Post>
+
+
+  public static getPublicCategories () {
+    return this.query()
+      .where('status', CategoryStatus.PUBLIC)
+      .orderBy('created_at', 'desc')
+  }
 }

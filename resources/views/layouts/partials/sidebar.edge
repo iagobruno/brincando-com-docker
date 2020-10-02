@@ -8,4 +8,12 @@
     <li><a href="/">Página inicial</a></li>
   </ul>
 
+  @if(publicCategories)
+    <div class="sidebar__section-title">Categorias</div>
+    <ul class="sidebar__categories">
+      @each(category in publicCategories)
+        <li><a href="/topic/{{ category.slug }}">{{ category.title }}</a></li>
+      @endeach
+    </ul>
+  @endif
 </header>

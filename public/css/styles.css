@@ -69,7 +69,7 @@ header.sidebar {
   padding: var(--default-padding);
   width: var(--sidebar-width);
   height: 100vh;
-  overflow: visible;
+  overflow: auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -180,4 +180,18 @@ ul.feed {
   position: absolute;
   bottom: calc(100% + 12px);
   left: 0;
+}
+
+.feed__featured-post relative-time {
+  font-size: 0.8em;
+}
+
+.sidebar__section-title {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin: var(--default-margin) 0 6px;
+}
+
+ul.sidebar__categories > li {
+  margin: 4px 0;
 }
