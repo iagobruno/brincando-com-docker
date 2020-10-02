@@ -19,7 +19,7 @@ export const PostFactory = Factory.define(Post, ({ faker }) => ({
   .state('private', (post) => post.status = PostStatus.PRIVATE)
   .state('published', (post) => {
     post.status = PostStatus.PUBLIC
-    post.publishedAt = DateTime.utc()
+    post.publishedAt = DateTime.local()
   })
   .relation('comments', () => CommentFactory)
   .relation('categories', () => CategoryFactory)

@@ -58,6 +58,10 @@ a:hover {
   text-decoration: underline;
 }
 
+relative-time {
+  text-transform: capitalize;
+}
+
 main {
   position: relative;
   max-width: 1320px;
