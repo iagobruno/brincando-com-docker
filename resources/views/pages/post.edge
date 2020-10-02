@@ -1,0 +1,71 @@
+@layout('layouts/main')
+
+@set('title', post.title)
+@set('body_class', 'post-page')
+
+@section('extra_head')
+  <link rel="stylesheet" href="/css/post-page.css">
+  <link rel="stylesheet" href="https://unpkg.com/github-markdown-css@4.0.0/github-markdown.css">
+@endsection
+
+@section('content')
+  <article class="post" id="post-{{ post.id }}">
+    <header>
+      <h1 class="post__title">{{ post.title }}</h1>
+      <p class="post__summary">{{ post.summary }}</p>
+      <div class="post__infos">
+        <div class="post__date">Postado em {{ post.publishedAt.toFormat("EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm") }}</div>
+      </div>
+      <img class="post__cover" src="{{ post.thumbnailUrl }}">
+    </header>
+
+    <div class="post__body markdown-body">
+      {{ safe( markdown(post.body) ) }}
+    </div>
+
+    <footer>
+      <div class="post__topics">
+        <strong>Categorias:</strong>
+        @each(cat in post.categories)
+          <a href="{{ route('category-page', { slug: cat.slug })}}">{{ cat.title }}</a>,
+        @endeach
+      </div>
+
+      <div class="post__comments">
+        <strong class="post__comments-title">Comentários</strong>
+
+        <form
+          class="post__comments__form"
+          action="{{ route('CommentsController.store', { slug: post.slug }) }}"
+          method="POST"
+        >
+          <input
+            type="text"
+            name="comment_body"
+            maxlength="255"
+            required
+            autocomplete="off"
+            placeholder="Digite um novo comentário..."
+            value="{{ flashMessages.get('comment_body') || '' }}"
+          >
+          <input type="submit" value="enviar" style="display: none">
+          @if(flashMessages.has('errors.comment_body'))
+            <div class="post__comments__form-error">{{ flashMessages.get('errors.comment_body') }}</div>
+          @endif
+        </form>
+
+        <ul class="post__comment-list">
+          @each(comment in post.comments)
+            <li class="post__comment">
+              <div>Anônimo disse:</div>
+              <div>{{ comment.body }}</div>
+              <div><relative-time datetime="{{ post.publishedAt }}"></relative-time></div>
+            </li>
+          @else
+            <div class="empty-msg">Nenhum comentário ainda.</div>
+          @endeach
+        </ul>
+      </div>
+    </footer>
+  </article>
+@endsection

@@ -1,0 +1,89 @@
+article.post {
+  padding: 20px 0 40px;
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+}
+
+.post__title {
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.post__summary {
+  margin: calc(var(--default-margin) - 20px) 0 14px;
+  opacity: .8;
+}
+
+.post__infos {
+  font-size: 0.9rem;
+  margin: 14px 0 24px;
+  opacity: .8;
+}
+
+.post__cover {
+  width: 100%;
+  display: block;
+}
+
+article.post header {
+  margin-bottom: var(--default-margin);
+}
+
+.post__body.markdown-body {
+  color: var(--text-color);
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+article.post footer {
+  margin-top: var(--default-margin);
+  font-size: 1rem;
+}
+
+.post__comments {
+  margin-top: var(--default-margin);
+}
+
+.post__comments-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.post__comment-list > .post__comment {
+  margin-bottom: 20px;
+}
+
+form.post__comments__form {
+  margin-bottom: 20px;
+}
+
+.post__comments__form input[name="comment_body"] {
+  background-color: rgba(0, 0, 0, .12);
+  border-radius: 50px;
+  border: none;
+  width: 100%;
+  padding: 11px 20px 12px;
+  font-size: 0.94rem;
+  font-weight: normal;
+  color: var(--text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  .post__comments__form input[name="comment_body"] {
+    background-color: var(--text-color);
+    color: var(--background-color);
+  }
+}
+
+.post__comments__form-error {
+  color: red;
+  margin-top: 6px;
+}

@@ -1,11 +1,11 @@
 <article class="feed__post {{ class_attr || '' }}" id="post-{{post.id}}">
-  <a href="/post/{{ post.slug }}" class="feed__post__link">
+  <a href="{{ route('post-page', { slug: post.slug }) }}" class="feed__post__link">
     <header class="feed__post__thumb-wrapper">
       <img src="{{ post.thumbnailUrl }}" class="feed__post__thumb" loading="lazy">
     </header>
     <div clss="feed__post__infos">
       <h3 class="feed__post__title">{{ post.title }}</h3>
-      <p class="feed__post__description">{{ post.summary }}</p>
+      <p class="feed__post__summary">{{ post.summary }}</p>
       <footer class="feed__post__footer">
         <relative-time datetime="{{ post.publishedAt }}"></relative-time>
       </footer>

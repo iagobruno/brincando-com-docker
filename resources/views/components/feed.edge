@@ -3,5 +3,7 @@
     <li>
       @!component('components/feed_post', { post })
     </li>
+  @else
+  <div class="empty-msg">Nenhuma postagem ainda.</div>
   @endeach
 </ul>

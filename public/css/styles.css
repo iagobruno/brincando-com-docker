@@ -60,6 +60,8 @@ a:hover {
 
 main {
   position: relative;
+  max-width: 1320px;
+  margin: 0 auto;
   padding: calc(var(--default-padding) + 12px);
   padding-left: calc(var(--sidebar-width) + var(--default-padding) + 12px);
 }
@@ -110,6 +112,11 @@ ul.sidebar__links li {
   line-height: normal;
 }
 
+.empty-msg {
+  text-align: center;
+  margin: 12px 0;
+}
+
 ul.feed {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
@@ -151,7 +158,7 @@ ul.feed {
   position: relative;
 }
 
-.feed__post__description {
+.feed__post__summary {
   font-size: 0.94em;
   margin-bottom: 4px;
 }
