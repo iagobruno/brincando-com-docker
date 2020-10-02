@@ -12,6 +12,7 @@ export const PostFactory = Factory.define(Post, ({ faker }) => ({
   thumbnailUrl: faker.image.image(),
 
 }))
+  .state('draft', (post) => post.status = PostStatus.DRAFT)
   .state('private', (post) => post.status = PostStatus.PRIVATE)
   .state('published', (post) => {
     post.status = PostStatus.PUBLIC

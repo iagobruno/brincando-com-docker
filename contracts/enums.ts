@@ -3,3 +3,8 @@ export enum PostStatus {
   PUBLIC = 'public',
   PRIVATE = 'private',
 }
+
+export enum CategoryStatus {
+  PUBLIC = 'public',
+  PRIVATE = 'private',
+}

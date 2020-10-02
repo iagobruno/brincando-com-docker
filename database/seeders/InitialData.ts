@@ -1,12 +1,20 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import Category from 'App/Models/Category'
+import { CategoryStatus } from 'Contracts/enums'
 import { PostFactory } from 'Database/factories'
 
 export default class InitialDatumSeeder extends BaseSeeder {
   public async run () {
     // Empty entire database
     await Database.from('posts').delete()
+    await Database.from('categories').delete()
+    await Database.from('category_post').delete()
 
+
+    await PostFactory
+      .apply('draft')
+      .create()
     await PostFactory
       .apply('published')
       .createMany(10)
@@ -22,6 +30,13 @@ export default class InitialDatumSeeder extends BaseSeeder {
       })
       .apply('published')
       .create()
+      .then(post =>
+        post.related('categories').create({
+          title: 'Design',
+          slug: 'design',
+          status: CategoryStatus.PUBLIC,
+        })
+      )
   }
 }
 
