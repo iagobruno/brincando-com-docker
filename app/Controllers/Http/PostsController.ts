@@ -3,11 +3,16 @@ import Post from 'App/Models/Post'
 
 export default class PostsController {
   public async index ({ view }: HttpContextContract) {
-    const latestPosts = await Post.query()
+    const result = await Post.query()
       .apply(scopes => scopes.published())
       .orderBy('published_at', 'desc')
 
-    return view.render('pages/home', { latestPosts })
+    const [featuredPost, ...latestPosts] = result
+
+    return view.render('pages/home', {
+      latestPosts,
+      featuredPost
+    })
   }
 
   public async show ({ }: HttpContextContract) {

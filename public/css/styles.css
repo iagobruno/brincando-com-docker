@@ -25,6 +25,10 @@
     --text-color: #D3D3D3;
     --sidebar-color: #2f2f2f;
   }
+
+  .feed__post__thumb-wrapper {
+    border: 1px solid rgba(255,255,255,.15) !important;
+  }
 }
 
 body {
@@ -131,19 +135,49 @@ ul.feed {
 .feed__post__title {
   -webkit-line-clamp: 3!important;
   word-break: break-word;
-  font-size: 1.3rem;
+  font-size: 1.3em;
   font-weight: 500;
   line-height: 1.26;
   color: var(--heading-color);
   margin-bottom: 10px;
+  position: relative;
 }
 
 .feed__post__description {
-  font-size: 0.94rem;
+  font-size: 0.94em;
   margin-bottom: 4px;
 }
 
 .feed__post__footer {
   opacity: .7;
-  font-size: 0.9rem;
+  font-size: 0.9em;
+}
+
+.feed__featured-post {
+  font-size: 1.4rem;
+  margin-bottom: calc(var(--default-margin) + 15px);
+}
+
+.feed__featured-post .feed__post__link {
+  display: flex;
+  align-items: center;
+}
+
+.feed__featured-post .feed__post__thumb-wrapper {
+  width: 60%;
+  padding-top: 37%;
+  margin-right: var(--default-margin);
+}
+
+.feed__featured-post .feed__post__title::before {
+  background-color: red;
+  color: #f8f8f8;
+  border-radius: 50px;
+  padding: 4px 10px 3px 6px;
+  content: '⭐ Destaque';
+  font-size: 0.46em;
+  font-weight: normal;
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
 }
