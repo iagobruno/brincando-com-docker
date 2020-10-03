@@ -1,5 +1,4 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Category from 'App/Models/Category'
 import Post from 'App/Models/Post'
 import { PostStatus } from 'Contracts/enums'
 
@@ -14,7 +13,6 @@ export default class PostsController {
     return view.render('pages/home', {
       latestPosts,
       featuredPost,
-      publicCategories: await Category.getPublicCategories()
     })
   }
 
@@ -28,11 +26,9 @@ export default class PostsController {
       })
       .firstOrFail()
 
-    const publicCategories = await Category.getPublicCategories()
 
     return view.render('pages/post', {
       post,
-      publicCategories,
       showCommentsSection: true
     })
   }

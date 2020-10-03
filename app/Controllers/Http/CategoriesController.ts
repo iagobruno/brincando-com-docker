@@ -6,11 +6,6 @@ export default class CategoriesController {
     const category = await Category.findByOrFail('slug', params.slug)
     await category.preload('posts')
 
-    const publicCategories = await Category.getPublicCategories()
-
-    return view.render('pages/category', {
-      category,
-      publicCategories
-    })
+    return view.render('pages/category', { category })
   }
 }

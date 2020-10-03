@@ -8,10 +8,10 @@
     <li><a href="/">Página inicial</a></li>
   </ul>
 
-  @if(publicCategories)
+  @if(request.publicCategories)
     <div class="sidebar__section-title">Categorias</div>
     <ul class="sidebar__categories">
-      @each(category in publicCategories)
+      @each(category in request.publicCategories)
         <li><a href="{{ route('category-page', { slug: category.slug })}}">{{ category.title }}</a></li>
       @endeach
     </ul>
