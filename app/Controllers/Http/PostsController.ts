@@ -6,7 +6,7 @@ export default class PostsController {
   public async index ({ view }: HttpContextContract) {
     const result = await Post.query()
       .apply(scopes => scopes.isPublished())
-      .apply(scopes => scopes.newestFirst())
+      .apply(scopes => scopes.latest())
 
     const [featuredPost, ...latestPosts] = result
 
@@ -29,7 +29,7 @@ export default class PostsController {
 
     return view.render('pages/post', {
       post,
-      showCommentsSection: true
+      showCommentsSection: post.receiveComments
     })
   }
 

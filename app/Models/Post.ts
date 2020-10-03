@@ -3,6 +3,7 @@ import { BaseModel, column, computed, HasMany, hasMany, ManyToMany, manyToMany, 
 import { PostStatus } from 'Contracts/enums'
 import Category from 'App/Models/Category'
 import Comment from 'App/Models/Comment'
+import Route from '@ioc:Adonis/Core/Route'
 
 export default class Post extends BaseModel {
   @column({ isPrimary: true })
@@ -21,10 +22,13 @@ export default class Post extends BaseModel {
   public body: string
 
   @column()
-  public thumbnailUrl: string
+  public thumbnailUrl?: string
 
   @column()
-  public summary: string
+  public summary?: string
+
+  @column()
+  public receiveComments: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -33,11 +37,19 @@ export default class Post extends BaseModel {
   public updatedAt: DateTime
 
   @column.dateTime()
-  public publishedAt: DateTime
+  public publishedAt?: DateTime
 
   @computed()
   public get url () {
-    return `/post/${this.slug}`
+    return Route.makeUrl('post-page', { slug: this.slug })
+  }
+
+  public get hasThumbnail () {
+    return typeof this.thumbnailUrl !== 'undefined'
+  }
+
+  public get formatedPublishedAt () {
+    return this.publishedAt?.toFormat("EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm")
   }
 
   public publish () {
@@ -46,19 +58,18 @@ export default class Post extends BaseModel {
     return this.save()
   }
 
-  public static isPublished = scope((query) => {
-    query.where('status', PostStatus.PUBLIC)
-  })
-  public static newestFirst = scope((query) => {
-    query.orderBy('published_at', 'desc')
-  })
-
   public static feed () {
     return this.query()
       .where('status', PostStatus.PUBLIC)
       .orderBy('published_at', 'desc')
   }
 
+  public static isPublished = scope((query) => {
+    query.where('status', PostStatus.PUBLIC)
+  })
+  public static latest = scope((query) => {
+    query.orderBy('published_at', 'desc')
+  })
 
   @manyToMany(() => Category)
   public categories: ManyToMany<typeof Category>

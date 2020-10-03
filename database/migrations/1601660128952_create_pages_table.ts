@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 import { PageStatus } from 'Contracts/enums'
 
-export default class Pages extends BaseSchema {
+export default class extends BaseSchema {
   protected tableName = 'pages'
 
   public async up () {

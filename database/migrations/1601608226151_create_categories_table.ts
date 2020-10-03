@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 import { CategoryStatus } from 'Contracts/enums'
 
-export default class Categories extends BaseSchema {
+export default class extends BaseSchema {
   protected tableName = 'categories'
   protected pivotTableName = 'category_post'
 

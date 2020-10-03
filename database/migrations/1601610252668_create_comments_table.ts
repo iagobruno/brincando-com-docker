@@ -1,6 +1,6 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Comments extends BaseSchema {
+export default class extends BaseSchema {
   protected tableName = 'comments'
 
   public async up () {

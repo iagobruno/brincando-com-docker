@@ -18,7 +18,6 @@ export default class Comment extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-
   @belongsTo(() => Post)
   public post: BelongsTo<typeof Post>
 }

@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 import { PostStatus } from 'Contracts/enums'
 
-export default class Posts extends BaseSchema {
+export default class extends BaseSchema {
   protected tableName = 'posts'
 
   public async up () {

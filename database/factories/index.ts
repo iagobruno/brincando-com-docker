@@ -14,7 +14,7 @@ export const PostFactory = Factory.define(Post, ({ faker }) => ({
   body: faker.lorem.paragraphs(5),
   summary: faker.lorem.sentence(20),
   thumbnailUrl: faker.image.image(),
-
+  receiveComments: true
 }))
   .state('draft', (post) => post.status = PostStatus.DRAFT)
   .state('private', (post) => post.status = PostStatus.PRIVATE)

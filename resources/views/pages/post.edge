@@ -17,7 +17,7 @@
       @endif
       <div class="post__infos">
         @if(post.publishedAt)
-          <div class="post__date">Postado em {{ post.publishedAt.toFormat("EEEE, dd 'de' MMMM 'de' yyyy 'às' HH:mm") }}</div>
+          <div class="post__date">Postado em {{ post.formatedPublishedAt }}</div>
         @endif
       </div>
       @if(post.thumbnailUrl)
