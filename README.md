@@ -9,6 +9,7 @@ Um simples blog feito com Adonis 5.
 > cd adonis5-blog
 > yarn install
 > copy .env.example .env # And edit the values
+> mkdir tmp
 > node ace build
 > node ace generate:key # And copy the value to the APP_KEY field in the .env file
 > node ace migration:run
