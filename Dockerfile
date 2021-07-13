@@ -11,10 +11,6 @@ RUN yarn install
 
 COPY . .
 
-RUN mkdir tmp
-RUN node ace build
-RUN node ace migration:run
-
 EXPOSE 3333
 
-ENTRYPOINT ["node","ace","serve","--watch"]
+ENTRYPOINT ["./entrypoint.sh"]

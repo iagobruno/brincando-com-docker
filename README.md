@@ -1,6 +1,6 @@
 # adonis5-blog
 
-Um simples blog feito com Adonis 5.
+Um simples blog feito com Adonis 5. Forked from [iagobruno/adonis5-blog](https://github.com/iagobruno/adonis5-blog).
 
 ## Getting Started
 
@@ -12,3 +12,13 @@ Um simples blog feito com Adonis 5.
 ```
 
 Open http://localhost:3333/ in the browser.
+
+## Seeding database
+
+Run the following command to populate the database with fake data.
+
+> Run `docker ps -a` to get the <container_id>.
+
+```bash
+> docker exec -it <container_id> node ace db:seed
+```
